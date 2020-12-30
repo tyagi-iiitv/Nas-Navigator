@@ -171,10 +171,10 @@ export class StartSearch extends Component {
     }
 }
 
-export class LoadDataset extends Component {
+export class GetSearchSpace extends Component {
     render(){
         const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Load Dataset</Nav.Link>
+            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Search Space</Nav.Link>
         );
         return upload_button;
     }
@@ -207,14 +207,6 @@ export class SaveModel extends Component {
     }
 }
 
-export class LoadModel extends Component {
-    render(){
-        const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Load Model</Nav.Link>
-        );
-        return upload_button;
-    }
-}
 
 export class GetAccuracyChart extends Component {
     render(){
