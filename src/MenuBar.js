@@ -226,32 +226,32 @@ export class GetBlockInfoChart extends Component {
     }
 }
 
-export class GetUnion extends Component {
+export class SetOperations extends Component {
+    constructor(props){
+        super(props);
+        this.state = {value: this.props.selected}; 
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        // to set the value of the dropdown to the selected value
+        this.setState({value: event}, ()=> this.props.callbackFromChild({model: this.state.value}));
+    }
+
     render(){
+        // //Displaying values in the values array and populating the dropdown menu
+        let values_array = [];
+        for(let i=0;i<this.props.values.length;i++){
+            values_array.push(<NavDropdown.Item eventKey={this.props.values[i]} onSelect={this.handleChange}>{this.props.values[i]}</NavDropdown.Item>);
+        }
+        // Code for the select button
         const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Union</Nav.Link>
+            <NavDropdown style={{paddingLeft: 15}} title="Set Operations" id="set-dropdown">
+                {values_array}
+            </NavDropdown>
         );
         return upload_button;
     }
 }
-
-export class GetIntersection extends Component {
-    render(){
-        const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Intersection</Nav.Link>
-        );
-        return upload_button;
-    }
-}
-
-export class GetCompliment extends Component {
-    render(){
-        const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Compliment</Nav.Link>
-        );
-        return upload_button;
-    }
-}
-
-
 

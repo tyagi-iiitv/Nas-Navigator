@@ -6,9 +6,11 @@ let losses = ['Cross Entropy', 'Mean Square', 'Mean Absolute', 'Mean Square Log'
 
 let datasets = ['Load', 'MNIST', 'COCO', 'ImageNet', 'Segment140', 'WordNet', 'Yelp Reviews'];
 
-let selected = {model: 'AlexNet', optimizer: 'Adam', loss: 'Cross Entropy', dataset: 'MNIST', trainModel: false, search:false};
+let operations = ['Union', 'Intersection', 'Compliment']
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected};
+let selected = {model: 'AlexNet', optimizer: 'Adam', loss: 'Cross Entropy', dataset: 'MNIST', trainModel: false, search:false, operation: 'Union'};
+
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations};
 
 export default state;
 

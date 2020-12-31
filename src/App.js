@@ -28,9 +28,7 @@ export default class App extends Component {
                     <menu.GetSearchSpace callbackFromChild={this.callbackFromChild}/>
                     <menu.GetAccuracyChart />
                     <menu.GetBlockInfoChart/>
-                    <menu.GetUnion/>
-                    <menu.GetIntersection/>
-                    <menu.GetCompliment/>
+                    <menu.SetOperations values={this.state.operations} selected={this.state.selected.operation} callbackFromChild={this.callbackFromChild}/>
                 </Nav>
                 <Nav>
                     <menu.TrainModel/>
