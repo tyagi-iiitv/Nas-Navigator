@@ -21,7 +21,7 @@ import { DiagramApplication, attachListenerToNode } from "./utils/playground"
 /* Import static content */
 import ops from "./static/ops";
 import presets from "./static/presets.json";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 interface IModelBuilderComponentProps {
     
@@ -55,7 +55,7 @@ const toastErrorSettings: ToastOptions = {
 
 const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     const diagramApp: DiagramApplication = DiagramApplication.getInstance();
-    const history = useHistory();
+    // const history = useHistory();
 
     const [state, setState] = useState<IModelBuilderComponentState>({ 
         forceUpdate: false, 
@@ -100,18 +100,18 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         }
     }, [selectedNode.id]);
     
-    useEffect(() => {
-        const nodes = (diagramApp.getActiveDiagram().getNodes() as unknown as NodeModel[]);
-        nodes.forEach((node: NodeModel) => {
-            attachListenerToNode(node, selectionChangeListener);
-        })
-        return () => {
-            const nodes = diagramApp.getActiveDiagram().getNodes();
-            nodes.forEach(node => {
-                node.clearListeners();
-            })
-        }
-    }, [history.location]);
+    // useEffect(() => {
+    //     const nodes = (diagramApp.getActiveDiagram().getNodes() as unknown as NodeModel[]);
+    //     nodes.forEach((node: NodeModel) => {
+    //         attachListenerToNode(node, selectionChangeListener);
+    //     })
+    //     return () => {
+    //         const nodes = diagramApp.getActiveDiagram().getNodes();
+    //         nodes.forEach(node => {
+    //             node.clearListeners();
+    //         })
+    //     }
+    // }, [history.location]);
 
     const forceRender = () => {
         diagramApp.getDiagramEngine().repaintCanvas()
@@ -324,7 +324,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             renderLoader={() => <Loader isActive={state.isLoading} size="tiny" label="Analyzing" />}
             addPreset={addPreset}
             onDownload={handleDownload}
-            onClickFaq={() => history.push('/faq')}
+            onClickFaq={() => console.log("history")}
         />
     </Container>
 }
