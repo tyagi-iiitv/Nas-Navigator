@@ -10,7 +10,9 @@ let operations = ['Union', 'Intersection', 'Compliment']
 
 let selected = {model: 'AlexNet', optimizer: 'Adam', loss: 'Cross Entropy', dataset: 'MNIST', trainModel: false, search:false, operation: 'Union'};
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations};
+let embedArr = [{x:1, y:1}, {x:2, y:1}, {x:10, y:1}, {x:5, y:10}]
+
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr};
 
 export default state;
 

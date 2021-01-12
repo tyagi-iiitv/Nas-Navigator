@@ -45,11 +45,11 @@ export default class App extends Component {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={6}>
-                            <SearchSpace/>
-                            <BlockInfo/>
+                            <SearchSpace emb={this.state.embed}/>
                         </Grid.Column>
                         <Grid.Column width={10}>
                             <ModelBuilder/>
+                            <BlockInfo/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
