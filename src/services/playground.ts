@@ -28,7 +28,6 @@ export const generateTFModel = (model: TensorflowIntermediateModelNode[]) => {
     model.map(item => { 
         graphObj[item.id] = item;
     });
-    
     /* Generate output tensors of all nodes(using layers.apply()) */
     for (const nodeId of depList) {
         const node = graphObj[nodeId];
@@ -60,8 +59,11 @@ export const generateTFModel = (model: TensorflowIntermediateModelNode[]) => {
     const inputTensors = inputIds.map((item) => graphObj[item].outputs);
     const outputTensors = outputIds.map((item) => graphObj[item].outputs);
 
+    // console.log(inputTensors, outputTensors);
+
     if (inputTensors && outputTensors) {
         // @ts-ignore
+        // console.log("here");
         const tfModel = tf.model({ inputs: inputTensors, outputs: outputTensors });
 
         return {tfModel, graphObj};

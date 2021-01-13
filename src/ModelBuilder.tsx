@@ -186,11 +186,8 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         try {
             setState({ ...state, isLoading: true })
             const intermediateModel = await parseGraph(diagramApp);
-
-            if (!intermediateModel) return;
-
+            if (!intermediateModel) return; 
             const modelResult = generateTFModel(intermediateModel);
-            
             if (download) {
                 const downloadResult = await modelResult
                 ?.tfModel
@@ -300,10 +297,11 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         return;
     }
     
-    const addPreset = async (name: string) => {
+    const addPreset = () => {
         const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
-        const stringifiedModel = await JSON.stringify(currentModel);
-        const modelInput = { model: stringifiedModel, name }
+        const stringifiedModel = JSON.stringify(currentModel);
+        console.log(stringifiedModel);
+        // const modelInput = { model: stringifiedModel, name }
         
     }
 

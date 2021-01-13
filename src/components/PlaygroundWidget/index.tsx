@@ -3,6 +3,7 @@ import React from "react";
 import "./index.scss";
 import { Container, Button, Input, Icon } from "semantic-ui-react";
 
+
 export interface PlaygroundWidgetProps {
     renderAvailableOps: () => any;
     renderAvailablePresets: () => any;
@@ -11,7 +12,7 @@ export interface PlaygroundWidgetProps {
     handleAddNode: (name: string, args: any, color: string, event: any) => any;
     handleAddPresetModel: (data: any) => any;
     renderLoader: () => any;
-    addPreset: (name: string) => any;
+    addPreset: () => any;
     onDownload: () => any;
     onClickFaq: () => any;
 }
@@ -36,6 +37,7 @@ export const PlaygroundWidget: React.FC<PlaygroundWidgetProps> = props => {
     const handleName = (e:any) => {
         setState({ name: e.target.value });
     }
+
 
     return (
         <Container fluid className="playground-widget">
@@ -65,7 +67,7 @@ export const PlaygroundWidget: React.FC<PlaygroundWidgetProps> = props => {
                 <div className='playground-widget__sidebar'>
                     <button
                         data-testid='btn-download'
-                        onClick={props.onDownload} 
+                        onClick={props.addPreset} 
                         className='playground-widget--btn-download'>
                         <Icon name='download'/>
                     </button>
