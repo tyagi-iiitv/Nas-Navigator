@@ -300,7 +300,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     const addPreset = () => {
         const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
         const stringifiedModel = JSON.stringify(currentModel);
-        console.log(stringifiedModel);
+        console.log(diagramApp.getActiveDiagram().getNodes());
         // const modelInput = { model: stringifiedModel, name }
         
     }

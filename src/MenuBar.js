@@ -3,8 +3,10 @@ import React, {Component} from 'react';
 import {NavDropdown, Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButton from 'react-toggle-button';
+import { DiagramApplication } from './utils/playground';
 
 
+const diagramApp = DiagramApplication.getInstance();
 
 export class GetDropdown extends Component {
     constructor(props){
@@ -173,6 +175,8 @@ export class StartSearch extends Component {
 
 export class GetSearchSpace extends Component {
     render(){
+        console.log("here")
+        console.log(diagramApp.getActiveDiagram().getNodes())
         const upload_button = (
             <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Search Space</Nav.Link>
         );

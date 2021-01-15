@@ -8,6 +8,7 @@ import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
 import {Container, Grid} from 'semantic-ui-react';   
 
+
 export default class App extends Component {
     constructor(props){
         super(props);
