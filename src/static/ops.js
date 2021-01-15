@@ -1,5 +1,44 @@
 const ops = [
     {
+        "func_name": "Conv Block",
+        "category": "Merge", 
+        "args": [
+            {"name": "Convolution", "type": "boolean"}, 
+            {"name": "BatchNorm", "type": "boolean"},
+            {"name": "ReLU", "type": "boolean"},
+            { "name": "filters", "type": "number" },
+            { "name": "kernelSize", "type": "number", "sub_type": "array" },
+            { "name": "strides", "type": "number", "sub_type": "array" },
+            { "name": "padding", "type": "multiSelect", "options": "valid|same|casual" },
+            { "name": "dataFormat", "type": "multiSelect", "options": "channelsFirst|channelsLast" },
+            { "name": "useBias", "type": "boolean" },
+            { 
+                "name": "activation", 
+                "type": "multiSelect", 
+                "options": "elu|hardSigmoid|linear|relu|relu6|selu|sigmoid|softmax|softplus|softsign|tanh"
+            },
+            {
+                "name": "kernelInitializer",
+                "type": "multiSelect",
+                "options": "constant|glorotNormal|glorotUniform|heNormal|heUniform|identity|leCunNormal|leCunUniform|ones|orthogonal|randomNormal|randomUniform|truncatedNormal|varianceScaling|zeros"
+            },
+            {
+                "name": "biasInitializer",
+                "type": "multiSelect",
+                "options": "constant|glorotNormal|glorotUniform|heNormal|heUniform|identity|leCunNormal|leCunUniform|ones|orthogonal|randomNormal|randomUniform|truncatedNormal|varianceScaling|zeros"
+            },
+            { "name": "name", "type": "string" },
+            { "name": "trainable", "type": "boolean" },
+            { "name": "axis", "type": "number" },
+            { "name": "name", "type": "string" },
+            { "name": "trainable", "type": "boolean" },
+            { "name": "maxValue", "type": "number" },
+            { "name": "name", "type": "string" },
+            { "name": "trainable", "type": "boolean" }
+        ]
+
+    },
+    {
         "func_name": "input",
         "category": "Input",
         "args": [

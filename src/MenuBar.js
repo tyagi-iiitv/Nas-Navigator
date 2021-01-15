@@ -174,11 +174,19 @@ export class StartSearch extends Component {
 }
 
 export class GetSearchSpace extends Component {
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        // console.log(diagramApp.getActiveDiagram().getNodes())
+    }
+
     render(){
-        console.log("here")
-        console.log(diagramApp.getActiveDiagram().getNodes())
         const upload_button = (
-            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Get Search Space</Nav.Link>
+            <Nav.Link style={{paddingLeft: 15, outline: 'none'}} onClick={this.handleClick}>Get Search Space</Nav.Link>
         );
         return upload_button;
     }
