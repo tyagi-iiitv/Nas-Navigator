@@ -181,7 +181,7 @@ export class GetSearchSpace extends Component {
 
     handleClick(event){
         event.preventDefault();
-        // console.log(diagramApp.getActiveDiagram().getNodes())
+        this.props.callbackFromChild({searchSpaceDisplay: true});
     }
 
     render(){

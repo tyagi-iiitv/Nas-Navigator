@@ -17,9 +17,14 @@ export default class SearchSpace extends Component {
                         y: this.props.emb.map(({y}) => y),
                         type: 'scatter',
                         mode: 'markers',
+                        text: this.props.emb.map(({mask}) => mask),
                         marker: {color: '#F08080', size: 10},
                     },
                 ]}
+                onHover = {(e)=>{
+                    this.props.callbackFromChild({hoverMask: e.points[0].text})
+                }}
+
                 layout={ {uirevision: false, xaxis:{autorange: true}, yaxis: {autorange: true}} }
                 />
             </div>

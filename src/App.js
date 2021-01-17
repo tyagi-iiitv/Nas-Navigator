@@ -17,10 +17,18 @@ export default class App extends Component {
     }
 
     callbackFromChild(dataFromChild){
-        return;
+        console.log(dataFromChild);
+        this.setState({dataRec: false});
+        this.setState(dataFromChild, ()=> this.setState({dataRec: true}))
     }
 
     render(){
+        if (!this.state.dataRec){
+            return(
+                <div>
+                </div>
+            )
+        }
         return(
             <div>
                 <Navbar bg='dark' variant='dark'>
@@ -46,7 +54,7 @@ export default class App extends Component {
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={6}>
-                            <SearchSpace emb={this.state.embed}/>
+                            <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
                         </Grid.Column>
                         <Grid.Column width={10}>
                             <ModelBuilder/>
