@@ -21,11 +21,11 @@ import { DiagramApplication, attachListenerToNode } from "./utils/playground"
 /* Import static content */
 import ops from "./static/ops";
 import presets from "./static/presets.json";
+import { isEntityName } from "typescript";
 // import { useHistory } from "react-router-dom";
 
 
 interface IModelBuilderComponentProps {
-    
 }
 interface IModelBuilderComponentState {
     forceUpdate: boolean;
@@ -147,6 +147,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
      */
     
     const selectionChangeListener = (arg: any) => {
+        console.log(arg.entity)
         if (arg.function === "selectionChanged") {
             if (!arg.isSelected) {
                 setSelectedNode({ node: undefined, id: undefined });
@@ -300,9 +301,13 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     const addPreset = () => {
         const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
         const stringifiedModel = JSON.stringify(currentModel);
-        console.log(stringifiedModel);
+        // console.log(stringifiedModel);
+        const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
+        diagramApp.getDiagramEngine().getModel().removeNode(node);
+        node.color = 'red';
+        diagramApp.getDiagramEngine().getModel().addNode(node);
+        forceRender();
         // const modelInput = { model: stringifiedModel, name }
-        
     }
 
     const handleDownload = () => {

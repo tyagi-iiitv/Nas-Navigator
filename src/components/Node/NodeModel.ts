@@ -16,8 +16,7 @@ export interface NodeModelGenerics extends BaseNodeModelGenerics {
 export class NodeModel extends BaseNodeModel<NodeModelGenerics> {
     args: any;
     name!: string;
-    color?: string
-	protected portsIn: DefaultPortModel[];
+    protected portsIn: DefaultPortModel[];
 	protected portsOut: DefaultPortModel[];
 
     constructor (options: NodeModelOptions = {}, initializePorts: boolean = true) {
@@ -96,7 +95,7 @@ export class NodeModel extends BaseNodeModel<NodeModelGenerics> {
     getOutPorts(): DefaultPortModel[] {
         return this.portsOut;
     }
-
+    
     serialize() {
         return _.merge(super.serialize(), { args: this.args, 
             name: this.name, 

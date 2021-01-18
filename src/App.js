@@ -17,7 +17,6 @@ export default class App extends Component {
     }
 
     callbackFromChild(dataFromChild){
-        console.log(dataFromChild);
         this.setState({dataRec: false});
         this.setState(dataFromChild, ()=> this.setState({dataRec: true}))
     }
@@ -57,7 +56,7 @@ export default class App extends Component {
                             <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
                         </Grid.Column>
                         <Grid.Column width={10}>
-                            <ModelBuilder/>
+                            <ModelBuilder hoverMask={this.state.hoverMask}/>
                             <BlockInfo/>
                         </Grid.Column>
                     </Grid.Row>
