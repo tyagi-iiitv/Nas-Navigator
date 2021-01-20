@@ -12,9 +12,9 @@ export interface PlaygroundWidgetProps {
     handleAddNode: (name: string, args: any, color: string, event: any) => any;
     handleAddPresetModel: (data: any) => any;
     renderLoader: () => any;
-    addPreset: () => any;
-    onDownload: () => any;
-    onClickFaq: () => any;
+    // addPreset: () => any;
+    // onDownload: () => any;
+    // onClickFaq: () => any;
 }
 export interface PlaygroundWidgetState {
     name: string;
@@ -24,15 +24,18 @@ export const PlaygroundWidget: React.FC<PlaygroundWidgetProps> = props => {
     const [state, setState] = React.useState<PlaygroundWidgetState>({ name: "" })
     const handleDrop = (event: any) => {
         const opsNodeData = event.dataTransfer.getData('ops-node')
+        // console.log(opsNodeData);
         if (opsNodeData) {
             const data = JSON.parse(opsNodeData);
             props.handleAddNode(data.name, data.args, data.color, event);
             return;
         }
         let data = JSON.parse(event.dataTransfer.getData('model-node'));
+        // console.log(data);
         if (data.data)  data = JSON.parse(data.data)
         
         props.handleAddPresetModel(data);
+        
     }
     const handleName = (e:any) => {
         setState({ name: e.target.value });
@@ -64,7 +67,7 @@ export const PlaygroundWidget: React.FC<PlaygroundWidgetProps> = props => {
                     { props.renderLoader() }
                     { props.renderCanvasWidget("playground-widget--canvas-wrapper") }
                 </div>
-                <div className='playground-widget__sidebar'>
+                {/* <div className='playground-widget__sidebar'>
                     <button
                         data-testid='btn-download'
                         onClick={props.addPreset} 
@@ -76,7 +79,7 @@ export const PlaygroundWidget: React.FC<PlaygroundWidgetProps> = props => {
                         onClick={() => props.onClickFaq()}>
                         FAQ
                     </button>
-                </div>
+                </div> */}
             </div> 
         </Container>
     )

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
+import {DiagramApplication} from './utils/playground'
 
+
+const diagramApp  = DiagramApplication.getInstance();
 export default class SearchSpace extends Component {
     render() {
         if(this.props.emb.length === 0){

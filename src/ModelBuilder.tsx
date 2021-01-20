@@ -26,6 +26,7 @@ import { isEntityName } from "typescript";
 
 
 interface IModelBuilderComponentProps {
+    hoverMask: any;
 }
 interface IModelBuilderComponentState {
     forceUpdate: boolean;
@@ -71,7 +72,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         id: undefined
     });
     const prevSelectedNode = usePrevious(selectedNode);
-
     useEffect(() => {
         try {
             if (state.error?.type === "Error") {
@@ -100,6 +100,19 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             }
         }
     }, [selectedNode.id]);
+
+    useEffect(() => {
+        try{
+            const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
+            diagramApp.getDiagramEngine().getModel().removeNode(node);
+            node.color = 'red';
+            diagramApp.getDiagramEngine().getModel().addNode(node);
+            forceRender();
+        }
+        catch(err){
+            console.log("here")
+        }
+    },[props.hoverMask]);
     
     // useEffect(() => {
     //     const nodes = (diagramApp.getActiveDiagram().getNodes() as unknown as NodeModel[]);
@@ -147,7 +160,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
      */
     
     const selectionChangeListener = (arg: any) => {
-        console.log(arg.entity)
         if (arg.function === "selectionChanged") {
             if (!arg.isSelected) {
                 setSelectedNode({ node: undefined, id: undefined });
@@ -299,14 +311,20 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     }
     
     const addPreset = () => {
-        const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
-        const stringifiedModel = JSON.stringify(currentModel);
-        // console.log(stringifiedModel);
-        const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
-        diagramApp.getDiagramEngine().getModel().removeNode(node);
-        node.color = 'red';
-        diagramApp.getDiagramEngine().getModel().addNode(node);
-        forceRender();
+        try{
+            const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
+            const stringifiedModel = JSON.stringify(currentModel);
+            // console.log(stringifiedModel);
+            const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
+            diagramApp.getDiagramEngine().getModel().removeNode(node);
+            node.color = 'red';
+            diagramApp.getDiagramEngine().getModel().addNode(node);
+            forceRender();
+            
+        }
+        catch(err){
+            
+        }
         // const modelInput = { model: stringifiedModel, name }
     }
 
@@ -326,9 +344,9 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 className={className} 
             />)}
             renderLoader={() => <Loader isActive={state.isLoading} size="tiny" label="Analyzing" />}
-            addPreset={addPreset}
-            onDownload={handleDownload}
-            onClickFaq={() => console.log("history")}
+            // addPreset={addPreset}
+            // onDownload={handleDownload}
+            // onClickFaq={() => console.log("history")}
         />
     </Container>
 }
