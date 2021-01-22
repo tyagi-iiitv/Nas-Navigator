@@ -22,6 +22,7 @@ import { DiagramApplication, attachListenerToNode } from "./utils/playground"
 import ops from "./static/ops";
 import presets from "./static/presets.json";
 import { isEntityName } from "typescript";
+import { diag } from "@tensorflow/tfjs";
 // import { useHistory } from "react-router-dom";
 
 
@@ -103,14 +104,25 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
 
     useEffect(() => {
         try{
-            const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
-            diagramApp.getDiagramEngine().getModel().removeNode(node);
-            node.color = 'red';
-            diagramApp.getDiagramEngine().getModel().addNode(node);
-            forceRender();
+            let nodes = diagramApp.getActiveDiagram().getNodes();
+            for(let i in props.hoverMask){
+                let node = nodes[Number(i)];
+                if(props.hoverMask[i] == 1){
+                    node.color = 'red';
+                }
+                else{
+                    node.color = node.options.color;
+                }
+            }
+            // console.log(diagramApp.getActiveDiagram().getNodes())
+            // forceRender();
+            // diagramApp.getDiagramEngine().getModel().removeNode(node);
+            // node.color = 'red';
+            // diagramApp.getDiagramEngine().getModel().addNode(node);
+            // forceRender();
         }
         catch(err){
-            console.log("here")
+            console.log(err)
         }
     },[props.hoverMask]);
     
