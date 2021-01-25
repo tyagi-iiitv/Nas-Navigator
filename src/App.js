@@ -56,7 +56,7 @@ export default class App extends Component {
                             <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
                         </Grid.Column>
                         <Grid.Column width={10}>
-                            <ModelBuilder hoverMask={this.state.hoverMask}/>
+                            <ModelBuilder hoverMask={this.state.hoverMask} fitnessScores={this.state.fitnessScores}/>
                             <BlockInfo/>
                         </Grid.Column>
                     </Grid.Row>

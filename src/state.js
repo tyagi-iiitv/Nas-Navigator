@@ -1,4 +1,4 @@
-import {embedArr} from './embeddings';
+import {embedArr, fitnessScores, initialFitness, blockFrequency} from './embeddings';
 
 let models = ['Load Network', 'AlexNet', 'LeNet', 'CustomizedNet', 'VGG', 'VGG11', 'VGG13', 'VGG16', 'VGG19', 'BigNet', 'ResNet34', 'ResNet50', 'ResNet101', 'Mask CNN', 'Yolo V3', 'MobileNet', 'IDFaceRec', 'DeepPubV3', 'ImageCaptioning'];
 
@@ -18,7 +18,7 @@ let dataRec = true;
 
 let hoverMask = [];
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask};
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, fitnessScores: fitnessScores, initialFitnessScores: initialFitness, blockFrequency: blockFrequency};
 
 export default state;
 
