@@ -7,6 +7,7 @@ import ModelBuilder from './ModelBuilder';
 import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
 import {Container, Grid} from 'semantic-ui-react';   
+import { blockFrequency } from './embeddings';
 
 
 export default class App extends Component {
@@ -52,13 +53,11 @@ export default class App extends Component {
                 </Navbar>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width={6}>
+                        <ModelBuilder hoverMask={this.state.hoverMask} barHover={this.state.barHover} callbackFromChild={this.callbackFromChild}/>    
+                        <Grid.Row width={10}>
+                            <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={blockFrequency} callbackFromChild={this.callbackFromChild}/>
                             <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
-                        </Grid.Column>
-                        <Grid.Column width={10}>
-                            <ModelBuilder hoverMask={this.state.hoverMask} fitnessScores={this.state.fitnessScores}/>
-                            <BlockInfo/>
-                        </Grid.Column>
+                        </Grid.Row>
                     </Grid.Row>
                 </Grid>
             </div>

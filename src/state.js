@@ -18,7 +18,9 @@ let dataRec = true;
 
 let hoverMask = [];
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, fitnessScores: fitnessScores, initialFitnessScores: initialFitness, blockFrequency: blockFrequency};
+let barHover =  null;
+
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, fitnessScores: fitnessScores, initialFitness: initialFitness, blockFrequency: blockFrequency, barHover: barHover};
 
 export default state;
 

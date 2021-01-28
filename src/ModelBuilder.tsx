@@ -28,6 +28,8 @@ import { diag } from "@tensorflow/tfjs";
 
 interface IModelBuilderComponentProps {
     hoverMask: any;
+    barHover: any;
+    callbackFromChild(dataFromChild: any): any;
 }
 interface IModelBuilderComponentState {
     forceUpdate: boolean;
@@ -105,24 +107,31 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     useEffect(() => {
         try{
             let nodes = diagramApp.getActiveDiagram().getNodes();
-            for(let i in props.hoverMask){
-                let node = nodes[Number(i)];
-                if(props.hoverMask[i] == 1){
-                    node.color = 'red';
+            if(props.barHover){
+                for(let i in nodes){
+                    if(i == props.barHover){
+                        nodes[i].color = 'red';
+                    }
+                    else{
+                        nodes[i].color = nodes[i].options.color;
+                    }
                 }
-                else{
-                    node.color = node.options.color;
+                props.callbackFromChild({barHover: null});
+            }
+            else{
+                for(let i in props.hoverMask){
+                    let node = nodes[Number(i)];
+                    if(props.hoverMask[i] == 1){
+                        node.color = 'red';
+                    }
+                    else{
+                        node.color = node.options.color;
+                    }
                 }
             }
-            // console.log(diagramApp.getActiveDiagram().getNodes())
-            // forceRender();
-            // diagramApp.getDiagramEngine().getModel().removeNode(node);
-            // node.color = 'red';
-            // diagramApp.getDiagramEngine().getModel().addNode(node);
-            // forceRender();
         }
         catch(err){
-            console.log(err)
+            // console.log(err)
         }
     },[props.hoverMask]);
     
