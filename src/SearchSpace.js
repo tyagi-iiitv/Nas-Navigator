@@ -28,7 +28,9 @@ export default class SearchSpace extends Component {
                     this.props.callbackFromChild({hoverMask: e.points[0].text})
                 }}
 
-                layout={ {uirevision: false, xaxis:{autorange: true}, yaxis: {autorange: true}} }
+                layout={ {uirevision: false, xaxis:{autorange: true}, yaxis: {autorange: true}, autosize: true} }
+                useResizeHandler={true}
+                style={{height: '100%'}}
                 />
             </div>
 

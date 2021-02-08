@@ -23,7 +23,9 @@ export default class BlockInfo extends React.Component {
         }
     
         }
-        layout={ {uirevision: false, xaxis:{autorange: true}, yaxis:{autorange: true}} }
+        layout={ {autosize:true}}
+        useResizeHandler={true}
+        style={{height: '100%'}}
       />
     );
   }

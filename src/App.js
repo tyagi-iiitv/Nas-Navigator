@@ -54,7 +54,7 @@ export default class App extends Component {
                 <Grid>
                     <Grid.Row>
                         <ModelBuilder hoverMask={this.state.hoverMask} barHover={this.state.barHover} callbackFromChild={this.callbackFromChild}/>    
-                        <Grid.Row width={10}>
+                        <Grid.Row width={10} style={{height: '30vh'}}>
                             <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={blockFrequency} callbackFromChild={this.callbackFromChild}/>
                             <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
                         </Grid.Row>
