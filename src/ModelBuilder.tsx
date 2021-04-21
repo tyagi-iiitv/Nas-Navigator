@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import { Container } from "semantic-ui-react";
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
@@ -25,6 +26,7 @@ import presets from "./static/presets.json";
 
 
 interface IModelBuilderComponentProps {
+    callbackFromChild: {canvasModel: any};
     
 }
 interface IModelBuilderComponentState {
@@ -249,6 +251,8 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
          *      in and out ports of source and target respectively
          * 4) Add link between source and target port using srcPort.add(trgPort)
          */
+
+        props.callbackFromChild({canvasModel: data.id});
         const nodes: any = [];
         const links: any = [];
         let presetToCurrentId: any = {};

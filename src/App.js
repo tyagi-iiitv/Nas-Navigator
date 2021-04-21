@@ -53,7 +53,7 @@ export default class App extends Component {
                     </Nav>
                 </Navbar>
                 <div className={styles.canvas}>
-                    <ModelBuilder/>
+                    <ModelBuilder callbackFromChild={this.callbackFromChild}/>
                 </div>
                 <div className={styles.charts}>
                     <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>

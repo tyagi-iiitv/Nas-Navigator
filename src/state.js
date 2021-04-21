@@ -18,7 +18,9 @@ let dataRec = true;
 
 let hoverMask = [];
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask};
+let canvasModel = null;
+
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, canvasModel: canvasModel};
 
 export default state;
 
