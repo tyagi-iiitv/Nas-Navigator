@@ -6,7 +6,8 @@ import state from './state';
 import ModelBuilder from './ModelBuilder';
 import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
-import {Container, Grid} from 'semantic-ui-react';   
+import styles from './App.module.scss';
+// import {Container, Grid} from 'semantic-ui-react';   
 
 
 export default class App extends Component {
@@ -30,7 +31,7 @@ export default class App extends Component {
             )
         }
         return(
-            <div>
+            <div className={styles.body}>
                 <Navbar bg='dark' variant='dark'>
                     <Navbar.Brand style={{fontSize: 25, padding: '5 0'}}>One-Shot Search</Navbar.Brand>
                     <Nav className="mr-auto">
@@ -51,17 +52,13 @@ export default class App extends Component {
                         <menu.StartSearch selected={this.state.selected.search} callbackFromChild={this.callbackFromChild}/>
                     </Nav>
                 </Navbar>
-                <Grid>
-                    <Grid.Row>
-                        <Grid.Column width={6}>
-                            <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
-                        </Grid.Column>
-                        <Grid.Column width={10}>
-                            <ModelBuilder/>
-                            <BlockInfo/>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+                <div className={styles.canvas}>
+                    <ModelBuilder/>
+                </div>
+                <div className={styles.charts}>
+                    <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
+                    <BlockInfo/>
+                </div>
             </div>
         )
     }
