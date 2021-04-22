@@ -252,7 +252,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
          * 4) Add link between source and target port using srcPort.add(trgPort)
          */
 
-        props.callbackFromChild({canvasModel: data.id});
         const nodes: any = [];
         const links: any = [];
         let presetToCurrentId: any = {};
@@ -298,6 +297,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             }
         })
         forceRender();
+        props.callbackFromChild({canvasModel: data.id});
         return;
     }
     
