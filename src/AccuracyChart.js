@@ -14,6 +14,9 @@ export default class PlotEx extends React.Component {
     }, 
     layout: { 
       datarevision: 0,
+      plot_bgcolor: 'transparent', 
+      paper_bgcolor: 'transparent',
+      title: 'Accuracy Chart'
     },
     revision: 0,
   }

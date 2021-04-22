@@ -31,6 +31,7 @@ export default class SearchSpace extends Component {
                             yaxis: {autorange: true}, 
                             paper_bgcolor: "transparent",
                             plot_bgcolor: "transparent",
+                            title: "Search Space"
                         }}
                 />
             </div>
