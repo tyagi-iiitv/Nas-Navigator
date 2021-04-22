@@ -7,7 +7,8 @@ import ModelBuilder from './ModelBuilder';
 import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
 import styles from './App.module.scss';
-import { blockFrequency } from './embeddings';
+import PlotEx from './AccuracyChart';
+// import { blockFrequency } from './embeddings';
 // import {Container, Grid} from 'semantic-ui-react';   
 
 
@@ -59,6 +60,7 @@ export default class App extends Component {
                 <div className={styles.charts}>
                     <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
+                    <PlotEx fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
                 </div>
             </div>
         )
