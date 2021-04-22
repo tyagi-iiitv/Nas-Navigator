@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
+import styles from './SearchSpace.module.scss'
 
 export default class SearchSpace extends Component {
     render() {
@@ -21,11 +22,16 @@ export default class SearchSpace extends Component {
                         marker: {color: '#F08080', size: 10},
                     },
                 ]}
-                onHover = {(e)=>{
-                    this.props.callbackFromChild({hoverMask: e.points[0].text})
-                }}
+                // onHover = {(e)=>{
+                //     this.props.callbackFromChild({hoverMask: e.points[0].text})
+                // }}
 
-                layout={ {uirevision: false, xaxis:{autorange: true}, yaxis: {autorange: true}} }
+                layout={ {  
+                            uirevision: false, xaxis:{autorange: true}, 
+                            yaxis: {autorange: true}, 
+                            paper_bgcolor: "transparent",
+                            plot_bgcolor: "transparent",
+                        }}
                 />
             </div>
 

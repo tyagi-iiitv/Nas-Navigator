@@ -7,15 +7,26 @@ export default class BlockInfo extends React.Component {
       <Plot
         data={[
           {
-            x: [1, 2, 3],
-            y: [2, 6, 3],
-            type: 'scatter',
-            mode: 'lines+markers',
-            marker: {color: 'red'},
-          },
-          {type: 'bar', x: [1, 2, 3], y: [2, 5, 3]},
+            type: 'scatter', 
+            x: this.props.fitnessScores.map(({y}) => y),
+            y: this.props.blockFrequency.map(({y}) => y), 
+            mode: 'markers',
+            marker: {color: '#F08080', size: 10},
+          }
         ]}
-        layout={ {width: 320, height: 240, title: 'A Fancy Plot'} }
+        onHover = {(e) => {
+            this.props.callbackFromChild({barHover: e.points[0].pointNumber})
+        }
+    
+        }
+        layout={{
+                    autosize:true, 
+                    title: "Block Information",
+                    paper_bgcolor: 'transparent',
+                    plot_bgcolor: 'transparent',
+                }}
+        useResizeHandler={true}
+        style={{height: '100%'}}
       />
     );
   }
