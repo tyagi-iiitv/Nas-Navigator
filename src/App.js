@@ -58,8 +58,8 @@ export default class App extends Component {
                     <ModelBuilder callbackFromChild={this.callbackFromChild}/>
                 </div>
                 <div className={styles.charts}>
-                    <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
-                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
+                    <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds}/>
+                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds}/>
                     <PlotEx fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
                 </div>
             </div>

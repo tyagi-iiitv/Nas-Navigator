@@ -22,7 +22,9 @@ let canvasModel = null;
 
 let barHover = null;
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, canvasModel: canvasModel, fitnessScores: fitnessScores, initialFitness: initialFitness, blockFrequency: blockFrequency, barHover: barHover};
+let nodeIds = [];
+
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, canvasModel: canvasModel, fitnessScores: fitnessScores, initialFitness: initialFitness, blockFrequency: blockFrequency, barHover: barHover, nodeIds: nodeIds};
 
 export default state;
 

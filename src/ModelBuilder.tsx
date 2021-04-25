@@ -148,6 +148,8 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
      */
     
     const selectionChangeListener = (arg: any) => {
+        // console.log(arg.entity.options.color)
+        // console.log(arg.entity.options.id)
         if (arg.function === "selectionChanged") {
             if (!arg.isSelected) {
                 setSelectedNode({ node: undefined, id: undefined });
@@ -252,6 +254,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
          */
         const nodes: any = [];
         const links: any = [];
+        const nodeIds = [];
         let presetToCurrentId: any = {};
 
         Object.keys(data.layers[1].models).forEach(nodeId => {
@@ -266,7 +269,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
 
         nodes.forEach((nodePreset: any) => {
             const { name, args, options, x, y, id } = nodePreset;
-            
+            nodeIds.push(id);
             const node = new NodeModel({ name, 
                 args: options.args, 
                 color: options.color,
@@ -294,6 +297,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 diagramApp.getDiagramEngine().getModel().addAll(link);
             }
         })
+        props.callbackFromChild({nodeIds: nodeIds});
         forceRender();
         return;
     }
