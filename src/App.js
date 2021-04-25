@@ -20,18 +20,19 @@ export default class App extends Component {
     }
 
     callbackFromChild(dataFromChild){
-        console.log(dataFromChild);
+        // console.log(dataFromChild);
         this.setState({dataRec: false});
         this.setState(dataFromChild, ()=> this.setState({dataRec: true}))
     }
 
     render(){
-        if (!this.state.dataRec){
-            return(
-                <div>
-                </div>
-            )
-        }
+        // if (!this.state.dataRec){
+        //     return(
+        //         <div>
+        //         </div>
+        //     )
+        // }
+        // console.log(this.state.nodeIds)
         return(
             <div className={styles.body}>
                 <Navbar bg='dark' variant='dark'>
@@ -58,7 +59,7 @@ export default class App extends Component {
                     <ModelBuilder callbackFromChild={this.callbackFromChild}/>
                 </div>
                 <div className={styles.charts}>
-                    <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds}/>
+                    <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds}/>
                     <PlotEx fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
                 </div>

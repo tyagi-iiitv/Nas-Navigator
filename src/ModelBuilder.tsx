@@ -71,6 +71,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         node: undefined,
         id: undefined
     });
+    const [nodeIds, setNodeIds] = useState(false);
     const prevSelectedNode = usePrevious(selectedNode);
 
     useEffect(() => {
@@ -84,6 +85,12 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             return;
         }
     }, [state.error]);
+    useEffect(() => {
+        // console.log(nodeIds.length)
+        if(nodeIds && nodeIds.length != 0){
+            props.callbackFromChild({nodeIds: nodeIds})
+        }
+    }, [nodeIds]);
     useEffect(() => {
         if (prevSelectedNode) {
             const {node, id} = prevSelectedNode;
@@ -101,6 +108,9 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             }
         }
     }, [selectedNode.id]);
+    // useEffect(() => {
+    //     props.callbackFromChild({nodeIds: state.nodeIds})
+    // }, [state.nodeIds]);
     
     // useEffect(() => {
     //     const nodes = (diagramApp.getActiveDiagram().getNodes() as unknown as NodeModel[]);
@@ -297,7 +307,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 diagramApp.getDiagramEngine().getModel().addAll(link);
             }
         })
-        props.callbackFromChild({nodeIds: nodeIds});
+        setNodeIds(nodeIds);
         forceRender();
         return;
     }

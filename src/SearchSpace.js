@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
 
-export default class SearchSpace extends Component {
-    render() {
-        if(this.props.emb.length === 0){
-            return <div/>
-        }
+const equals = (a,b) => 
+    a.length === b.length &&
+    a.every((v,i) => v === b[i]);
 
+export default class SearchSpace extends Component {
+    componentDidUpdate(prevProps){
+        if(prevProps.nodes && this.props.nodes && !equals(prevProps.nodes, this.props.nodes)){
+            console.log("now search space will change");
+        }
+    }
+    render() {
+        // if(this.props.emb.length === 0){
+        //     return <div/>
+        // }
         return (
             <div>
-                <Plot
+                {/* <Plot
                 data={[
                     {   
                         //Creates the original scatterplot based on the embeddings
@@ -32,7 +40,7 @@ export default class SearchSpace extends Component {
                             plot_bgcolor: "transparent",
                             title: "Search Space"
                         }}
-                />
+                    />  */}
             </div>
 
         );
