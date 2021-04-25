@@ -21,11 +21,17 @@ export default class SearchSpace extends Component {
                         marker: {color: '#F08080', size: 10},
                     },
                 ]}
-                onHover = {(e)=>{
-                    this.props.callbackFromChild({hoverMask: e.points[0].text})
-                }}
+                // onHover = {(e)=>{
+                //     this.props.callbackFromChild({hoverMask: e.points[0].text})
+                // }}
 
-                layout={ {uirevision: false, xaxis:{autorange: true}, yaxis: {autorange: true}} }
+                layout={ {  
+                            uirevision: false, xaxis:{autorange: true}, 
+                            yaxis: {autorange: true}, 
+                            paper_bgcolor: "transparent",
+                            plot_bgcolor: "transparent",
+                            title: "Search Space"
+                        }}
                 />
             </div>
 
