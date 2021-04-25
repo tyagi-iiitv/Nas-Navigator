@@ -32,10 +32,6 @@ export default class SearchSpace extends Component {
         }
     }
     render() {
-        // if(this.props.emb.length === 0){
-        //     return <div/>
-        // }
-        console.log(this.state, "Inside render")
         return (
             <div>
                 <Plot

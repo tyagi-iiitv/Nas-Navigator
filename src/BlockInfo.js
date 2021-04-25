@@ -1,24 +1,55 @@
+
 import React from 'react';
 import Plot from 'react-plotly.js';
 
+// X range: 0-1, Y range: 130-170
+const equals = (a,b) => 
+    a.length === b.length &&
+    a.every((v,i) => v === b[i]);
+
 export default class BlockInfo extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {emb: []}
+    this.generateData = this.generateData.bind(this);
+  }
+
+  generateData(nodeIds){
+    let emb = new Array(nodeIds.length);
+    for(let i=0;i<nodeIds.length;i++){
+      let curDict = {
+        x: Math.random(),
+        y: Math.floor(Math.random() * (170-130) + 130),
+        id: nodeIds[i]
+      }
+      emb[i] = curDict;
+    }
+    this.setState({emb: emb})
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps && this.props.nodeIds && !equals(prevProps.nodeIds, this.props.nodeIds)){
+      this.generateData(this.props.nodeIds);
+    }
+  }
+
   render() {
     return (
       <Plot
         data={[
           {
             type: 'scatter', 
-            x: this.props.fitnessScores.map(({y}) => y),
-            y: this.props.blockFrequency.map(({y}) => y), 
+            x: this.state.emb.map(({x}) => x),
+            y: this.state.emb.map(({y}) => y), 
             mode: 'markers',
             marker: {color: '#F08080', size: 10},
           }
         ]}
-        onHover = {(e) => {
-            this.props.callbackFromChild({barHover: e.points[0].pointNumber})
-        }
+        // onHover = {(e) => {
+        //     this.props.callbackFromChild({barHover: e.points[0].pointNumber})
+        // }
     
-        }
+        // }
         layout={{
                   uirevision: false, xaxis:{autorange: true}, 
                   yaxis: {autorange: true}, 
