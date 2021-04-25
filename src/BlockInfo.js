@@ -20,10 +20,11 @@ export default class BlockInfo extends React.Component {
     
         }
         layout={{
-                    autosize:true, 
-                    title: "Block Information",
-                    paper_bgcolor: 'transparent',
-                    plot_bgcolor: 'transparent',
+                  uirevision: false, xaxis:{autorange: true}, 
+                  yaxis: {autorange: true}, 
+                  paper_bgcolor: "transparent",
+                  plot_bgcolor: "transparent",
+                  title: "Block Information",
                 }}
         useResizeHandler={true}
         style={{height: '100%'}}
