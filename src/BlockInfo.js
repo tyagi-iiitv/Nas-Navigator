@@ -10,7 +10,7 @@ const equals = (a,b) =>
 export default class BlockInfo extends React.Component {
   constructor(props){
     super(props);
-    this.state = {emb: []}
+    this.state = {emb: [], selectedNode: []}
     this.generateData = this.generateData.bind(this);
   }
 
@@ -31,6 +31,11 @@ export default class BlockInfo extends React.Component {
     if(prevProps && this.props.nodeIds && !equals(prevProps.nodeIds, this.props.nodeIds)){
       this.generateData(this.props.nodeIds);
     }
+    if(this.props.selectedNode && this.props.selectedNode != prevProps.selectedNode){
+      let index = this.props.nodeIds.indexOf(this.props.selectedNode);
+      console.log(index, this.props.nodeIds)
+      // this.setState({selectedNode: [this.state.emb[index]]});
+    }
   }
 
   render() {
@@ -43,6 +48,13 @@ export default class BlockInfo extends React.Component {
             y: this.state.emb.map(({y}) => y), 
             mode: 'markers',
             marker: {color: '#F08080', size: 10},
+          },
+          {
+            type: 'scatter', 
+            x: this.state.selectedNode.map(({x}) => x),
+            y: this.state.selectedNode.map(({y}) => y), 
+            mode: 'markers',
+            marker: {color: '#d6604d', size: 30},
           }
         ]}
         // onHover = {(e) => {

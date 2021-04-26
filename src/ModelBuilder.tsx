@@ -107,6 +107,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 forceRender();
             }
         }
+        props.callbackFromChild({selectedNode: selectedNode.id})
     }, [selectedNode.id]);
     // useEffect(() => {
     //     props.callbackFromChild({nodeIds: state.nodeIds})
@@ -279,6 +280,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
 
         nodes.forEach((nodePreset: any) => {
             const { name, args, options, x, y, id } = nodePreset;
+            console.log(id, options.id)
             nodeIds.push(id);
             const node = new NodeModel({ name, 
                 args: options.args, 

@@ -20,7 +20,7 @@ export default class App extends Component {
     }
 
     callbackFromChild(dataFromChild){
-        // console.log(dataFromChild);
+        console.log(dataFromChild);
         this.setState({dataRec: false});
         this.setState(dataFromChild, ()=> this.setState({dataRec: true}))
     }
@@ -60,7 +60,7 @@ export default class App extends Component {
                 </div>
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
-                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds}/>
+                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
                     <PlotEx fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
                 </div>
             </div>
