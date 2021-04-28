@@ -35,6 +35,9 @@ export default class BlockInfo extends React.Component {
       let index = this.props.nodeIds.indexOf(this.props.selectedNode);
       this.setState({selectedNode: [this.state.emb[index]]});
     }
+    else if(!this.props.selectedNode && this.props.selectedNode != prevProps.selectedNode){
+      this.setState({selectedNode: []});
+    }
   }
 
   render() {
