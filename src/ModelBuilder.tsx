@@ -103,12 +103,22 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                         newArgs[item.name] = item.value;
                     }
                 });
+                diagNode.setSelected(false);
                 diagNode.setArgs(newArgs);
                 forceRender();
             }
         }
-        props.callbackFromChild({selectedNode: selectedNode.id})
+        if(!props.barHover)
+            props.callbackFromChild({selectedNode: selectedNode.id})
     }, [selectedNode.id]);
+    
+    useEffect(() => {
+        if(props.barHover){
+            console.log(selectedNode)
+            let node = diagramApp.getActiveDiagram().getNode(props.barHover);
+            node.setSelected(true);      
+        }      
+    }, [props.barHover]);
     // useEffect(() => {
     //     props.callbackFromChild({nodeIds: state.nodeIds})
     // }, [state.nodeIds]);
@@ -159,8 +169,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
      */
     
     const selectionChangeListener = (arg: any) => {
-        // console.log(arg.entity.options.color)
-        // console.log(arg.entity.options.id)
+        // console.log(arg)
         if (arg.function === "selectionChanged") {
             if (!arg.isSelected) {
                 setSelectedNode({ node: undefined, id: undefined });
@@ -316,7 +325,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     const addPreset = () => {
         const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
         const stringifiedModel = JSON.stringify(currentModel);
-        console.log(stringifiedModel);
+        // console.log(stringifiedModel);
         // const modelInput = { model: stringifiedModel, name }
         
     }
