@@ -56,7 +56,7 @@ export default class App extends Component {
                     </Nav>
                 </Navbar>
                 <div className={styles.canvas}>
-                    <ModelBuilder callbackFromChild={this.callbackFromChild}/>
+                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover}/>
                 </div>
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />

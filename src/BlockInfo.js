@@ -59,9 +59,10 @@ export default class BlockInfo extends React.Component {
             marker: {color: '#d6604d', size: 30},
           }
         ]}
-        // onHover = {(e) => {
-        //     this.props.callbackFromChild({barHover: e.points[0].pointNumber})
-        // }
+        onHover = {(e) => {
+          // console.log(this.state.emb[e.points[0].pointNumber].id)
+          this.props.callbackFromChild({barHover: this.state.emb[e.points[0].pointNumber].id})
+        }}
     
         // }
         layout={{
