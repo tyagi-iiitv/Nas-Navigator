@@ -280,8 +280,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
 
         nodes.forEach((nodePreset: any) => {
             const { name, args, options, x, y, id } = nodePreset;
-            console.log(id, options.id)
-            nodeIds.push(id);
             const node = new NodeModel({ name, 
                 args: options.args, 
                 color: options.color,
@@ -289,6 +287,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             });
             node.setPosition(x, y);
             node.setSelected(true);
+            nodeIds.push(node.options.id);
             diagramApp.getDiagramEngine().getModel().addNode(node);
             attachListenerToNode(node, selectionChangeListener);
             presetToCurrentId[id] = node;
