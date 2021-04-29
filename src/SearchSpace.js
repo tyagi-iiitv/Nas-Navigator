@@ -46,9 +46,11 @@ export default class SearchSpace extends Component {
                         marker: {color: '#F08080', size: 10},
                     },
                 ]}
-                // onHover = {(e)=>{
-                //     this.props.callbackFromChild({hoverMask: e.points[0].text})
-                // }}
+                onHover = {(e)=>{
+                    // max int = 2^n-1
+                    // generate random number b/w 1 and max int -> that is the mask
+                    this.props.callbackFromChild({hoverMask: e.points[0].text})
+                }}
 
                 layout={ {  
                             uirevision: false, xaxis:{autorange: true}, 

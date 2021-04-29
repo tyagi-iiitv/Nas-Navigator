@@ -21,7 +21,6 @@ export default class App extends Component {
     }
 
     changeOnCanvas(enter){
-        console.log(enter)
         if(enter && !this.state.onCanvas)
             this.setState({onCanvas: true});
         else if(!enter && this.state.onCanvas)
