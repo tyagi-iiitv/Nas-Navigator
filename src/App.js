@@ -17,6 +17,15 @@ export default class App extends Component {
         super(props);
         this.state = state;
         this.callbackFromChild = this.callbackFromChild.bind(this);
+        this.changeOnCanvas = this.changeOnCanvas.bind(this);
+    }
+
+    changeOnCanvas(enter){
+        console.log(enter)
+        if(enter && !this.state.onCanvas)
+            this.setState({onCanvas: true});
+        else if(!enter && this.state.onCanvas)
+            this.setState({onCanvas: false});
     }
 
     callbackFromChild(dataFromChild){
@@ -26,7 +35,7 @@ export default class App extends Component {
     }
 
     render(){
-        // if (!this.state.dataRec){
+        // if (this.state.onCanvas){
         //     return(
         //         <div>
         //         </div>
@@ -55,8 +64,9 @@ export default class App extends Component {
                         <menu.StartSearch selected={this.state.selected.search} callbackFromChild={this.callbackFromChild}/>
                     </Nav>
                 </Navbar>
-                <div className={styles.canvas}>
-                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover}/>
+                <div className={styles.canvas} onMouseEnter={()=> this.changeOnCanvas(true)}
+                onMouseLeave={()=> this.changeOnCanvas(false)}>
+                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover} onCanvas={this.state.onCanvas}/>
                 </div>
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />

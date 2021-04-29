@@ -92,6 +92,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         }
     }, [nodeIds]);
     useEffect(() => {
+        console.log(props.onCanvas);
         if (prevSelectedNode) {
             const {node, id} = prevSelectedNode;
             if (id) {
@@ -108,8 +109,9 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 forceRender();
             }
         }
-        if(!props.barHover)
+        if(props.onCanvas)
             props.callbackFromChild({selectedNode: selectedNode.id})
+        
     }, [selectedNode.id]);
     
     useEffect(() => {
@@ -343,7 +345,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             handleAddPresetModel={addPresetModel}
             renderCanvasWidget={(className?: string) => (<CanvasWidget 
                 engine={diagramApp.getDiagramEngine()} 
-                className={className} 
+                className={className}
             />)}
             renderLoader={() => <Loader isActive={state.isLoading} size="tiny" label="Analyzing" />}
             addPreset={addPreset}
