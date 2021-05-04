@@ -60,7 +60,7 @@ export default class BlockInfo extends React.Component {
           }
         ]}
         onHover = {(e) => {
-          console.log(this.state.emb[e.points[0].pointNumber].id)
+          // console.log(this.state.emb[e.points[0].pointNumber].id)
           this.props.callbackFromChild({barHover: this.state.emb[e.points[0].pointNumber].id})
         }}
     

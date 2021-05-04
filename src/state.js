@@ -16,7 +16,7 @@ let searchSpaceDisplay = false;
 
 let dataRec = true;
 
-let hoverMask = [];
+let hoverMask = null;
 
 let canvasModel = null;
 

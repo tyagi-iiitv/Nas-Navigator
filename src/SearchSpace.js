@@ -13,13 +13,14 @@ export default class SearchSpace extends Component {
     }
 
     generateData(nodeIds){
-        // let numNodes = nodeIds.length;
+        let numNodes = nodeIds.length;
         let numPoints = 200;
         let emb = new Array(numPoints);
         for(let i=0;i<numPoints;i++){
             let curDict = {
                 x: Math.random(), 
                 y: Math.random(),
+                mask: Math.floor(Math.random()*Math.pow(2,numNodes-1)).toString(2).padStart(numNodes,0),
             };
             emb[i] = curDict;
         }
@@ -49,7 +50,7 @@ export default class SearchSpace extends Component {
                 onHover = {(e)=>{
                     // max int = 2^n-1
                     // generate random number b/w 1 and max int -> that is the mask
-                    this.props.callbackFromChild({hoverMask: e.points[0].text})
+                    this.props.callbackFromChild({hoverMask: this.state.emb[e.points[0].pointNumber].mask})
                 }}
 
                 layout={ {  

@@ -121,6 +121,16 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             node.setSelected(true);      
         }      
     }, [props.barHover]);
+
+    useEffect(() => {
+        if(props.hoverMask){
+            let nodes = diagramApp.getActiveDiagram().getNodes();
+            for(let i=0;i<props.hoverMask.length;i++){
+                if(props.hoverMask[i] === '1')
+                    nodes[i].setSelected(true);
+            }
+        }
+    }, [props.hoverMask]);
     // useEffect(() => {
     //     props.callbackFromChild({nodeIds: state.nodeIds})
     // }, [state.nodeIds]);

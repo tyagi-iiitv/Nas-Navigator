@@ -22,7 +22,7 @@ export default class App extends Component {
 
     changeOnCanvas(enter){
         if(enter && !this.state.onCanvas)
-            this.setState({onCanvas: true});
+            this.setState({onCanvas: true, barHover: null, hoverMask: null});
         else if(!enter && this.state.onCanvas)
             this.setState({onCanvas: false});
     }
@@ -65,7 +65,7 @@ export default class App extends Component {
                 </Navbar>
                 <div className={styles.canvas} onMouseEnter={()=> this.changeOnCanvas(true)}
                 onMouseLeave={()=> this.changeOnCanvas(false)}>
-                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover} onCanvas={this.state.onCanvas}/>
+                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover} onCanvas={this.state.onCanvas} hoverMask={this.state.hoverMask}/>
                 </div>
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
