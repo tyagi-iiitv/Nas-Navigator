@@ -10,7 +10,11 @@ let datasets = ['Load', 'MNIST', 'COCO', 'ImageNet', 'Segment140', 'WordNet', 'Y
 
 let operations = ['Union', 'Intersection', 'Compliment']
 
-let selected = {model: 'AlexNet', optimizer: 'Adam', loss: 'Cross Entropy', dataset: 'MNIST', trainModel: false, search:false, operation: 'Union'};
+let selected = {model: 'AlexNet', optimizer: 'Adam', loss: 'Cross Entropy', dataset: 'MNIST', operation: 'Union'};
+
+let trainModel = false;
+
+let search = false;
 
 let searchSpaceDisplay = false;
 
@@ -26,7 +30,7 @@ let nodeIds = [];
 
 let selectedNode = null;
 
-let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, canvasModel: canvasModel, fitnessScores: fitnessScores, initialFitness: initialFitness, blockFrequency: blockFrequency, barHover: barHover, nodeIds: nodeIds, selectedNode: selectedNode, onCanvas: true};
+let state = {models: models, optimizers: optimizers, losses: losses, datasets: datasets, selected: selected, operations: operations, embed:embedArr, searchSpaceDisplay: searchSpaceDisplay, dataRec: dataRec, hoverMask: hoverMask, canvasModel: canvasModel, fitnessScores: fitnessScores, initialFitness: initialFitness, blockFrequency: blockFrequency, barHover: barHover, nodeIds: nodeIds, selectedNode: selectedNode, onCanvas: true, trainModel: trainModel, search: search};
 
 export default state;
 

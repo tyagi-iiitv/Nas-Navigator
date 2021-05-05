@@ -58,9 +58,9 @@ export default class App extends Component {
                     </Nav>
                     <Nav>
                         <menu.TrainModel/>
-                        <menu.StartSearch selected={this.state.selected.trainModel} callbackFromChild={this.callbackFromChild}/>
+                        <menu.StartTrain selected={this.state.trainModel} callbackFromChild={this.callbackFromChild}/>
                         <menu.SearchModel/>
-                        <menu.StartSearch selected={this.state.selected.search} callbackFromChild={this.callbackFromChild}/>
+                        <menu.StartSearch selected={this.state.search} callbackFromChild={this.callbackFromChild}/>
                     </Nav>
                 </Navbar>
                 <div className={styles.canvas} onMouseEnter={()=> this.changeOnCanvas(true)}
@@ -70,7 +70,7 @@ export default class App extends Component {
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
-                    <PlotEx fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild}/>
+                    <PlotEx trainModel={this.state.trainModel}/>
                 </div>
             </div>
         )

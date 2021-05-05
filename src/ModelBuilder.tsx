@@ -92,7 +92,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         }
     }, [nodeIds]);
     useEffect(() => {
-        console.log(props.onCanvas);
+        // console.log(props.onCanvas);
         if (prevSelectedNode) {
             const {node, id} = prevSelectedNode;
             if (id) {
@@ -116,7 +116,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     
     useEffect(() => {
         if(props.barHover){
-            console.log(selectedNode)
+            // console.log(selectedNode)
             let node = diagramApp.getActiveDiagram().getNode(props.barHover);
             node.setSelected(true);      
         }      
