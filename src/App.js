@@ -70,7 +70,7 @@ export default class App extends Component {
                 <div className={styles.charts}>
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
-                    <PlotEx trainModel={this.state.trainModel}/>
+                    <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
                 </div>
             </div>
         )

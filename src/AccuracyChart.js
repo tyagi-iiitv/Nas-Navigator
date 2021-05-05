@@ -1,49 +1,63 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 export default class PlotEx extends React.Component {
-  state = {
-    line1: {
-      x: [0],
-      y: [0], 
-      name: 'Line 1'
-    },
-    line2: {
-      x: [0],
-      y: [0],
-      name: 'Line 2'
-    }, 
-    layout: { 
-      datarevision: 0,
-      plot_bgcolor: 'transparent', 
-      paper_bgcolor: 'transparent',
-      title: 'Accuracy Chart'
-    },
-    revision: 0,
-  }
-  componentDidMount() {
-    console.log("did mount")
-    if(this.props.trainModel)
-      setInterval(this.increaseGraphic, 1000);
+  constructor(props){
+    super(props);
+    this.state = {
+      values: this.props.accuracyValues,
+      line1: {
+        x: [0],
+        y: [this.props.loss[0]], 
+        name: 'Loss'
+      },
+      line2: {
+        x: [0],
+        y: [this.props.valLoss[0]],
+        name: 'Validation Loss'
+      }, 
+      layout: { 
+        datarevision: 0,
+        plot_bgcolor: 'transparent', 
+        paper_bgcolor: 'transparent',
+        title: 'Loss Chart'
+      },
+      revision: 0,
+      loss: this.props.loss,
+      valLoss: this.props.valLoss,
+      interval: null,
+    }
   }
   
+  // componentDidMount() {
+  //   console.log("did mount")
+  //   if(this.props.trainModel)
+  //     setInterval(this.increaseGraphic, 1000);
+  // }
+  
   componentDidUpdate(prevProps){
-    if(prevProps.trainModel !== this.props.trainModel){
-      setInterval(this.increaseGraphic, 1000);
+    if(!this.props.trainModel && this.state.interval){
+      console.log("clear interval")
+      clearInterval(this.state.interval);
+    }
+    if(this.props.trainModel && prevProps.trainModel !== this.props.trainModel){
+      console.log("did update")
+      this.setState({interval: setInterval(this.increaseGraphic, 1000)});
     }
   }
 
-  rand = () => parseInt(Math.random() * 10 + this.state.revision, 10);
+  // rand = () => parseInt(Math.random() * 10 + this.state.revision, 10);
   increaseGraphic = () => {
     if(this.props.trainModel){
+      console.log("here")
       const { line1, line2, layout } = this.state;
-      line1.x.push(this.rand());
-      line1.y.push(this.rand());
+      line1.x.push(this.state.revision+1);
+      line1.y.push(this.state.loss[this.state.revision+1]);
       if (line1.x.length >= 10) {
         line1.x.shift();
         line1.y.shift();
       } 
-      line2.x.push(this.rand());
-      line2.y.push(this.rand());
+      line2.x.push(this.state.revision+1);
+      line2.y.push(this.state.valLoss[this.state.revision+1]);
       if (line2.x.length >= 10) {
         line2.x.shift();
         line2.y.shift();
@@ -53,6 +67,7 @@ export default class PlotEx extends React.Component {
     }
   }
   render() {  
+    // console.log(this.props.loss, this.props.valLoss)
     return (<div>
       <Plot 
         data={[
