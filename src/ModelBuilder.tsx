@@ -126,6 +126,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         if(props.hoverMask){
             let nodes = diagramApp.getActiveDiagram().getNodes();
             for(let i=0;i<props.hoverMask.length;i++){
+                nodes[i].setSelected(false);
                 if(props.hoverMask[i] === '1')
                     nodes[i].setSelected(true);
             }
