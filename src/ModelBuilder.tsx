@@ -22,11 +22,15 @@ import { DiagramApplication, attachListenerToNode } from "./utils/playground"
 /* Import static content */
 import ops from "./static/ops";
 import presets from "./static/presets.json";
+import { isEntityName } from "typescript";
+import { diag } from "@tensorflow/tfjs";
 // import { useHistory } from "react-router-dom";
 
 
 interface IModelBuilderComponentProps {
-    
+    hoverMask: any;
+    barHover: any;
+    callbackFromChild(dataFromChild: any): any;
 }
 interface IModelBuilderComponentState {
     forceUpdate: boolean;
@@ -73,7 +77,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
     });
     const [nodeIds, setNodeIds] = useState(false);
     const prevSelectedNode = usePrevious(selectedNode);
-
     useEffect(() => {
         try {
             if (state.error?.type === "Error") {
@@ -113,6 +116,37 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             props.callbackFromChild({selectedNode: selectedNode.id})
         
     }, [selectedNode.id]);
+
+    useEffect(() => {
+        try{
+            let nodes = diagramApp.getActiveDiagram().getNodes();
+            if(props.barHover){
+                for(let i in nodes){
+                    if(i == props.barHover){
+                        nodes[i].color = 'red';
+                    }
+                    else{
+                        nodes[i].color = nodes[i].options.color;
+                    }
+                }
+                props.callbackFromChild({barHover: null});
+            }
+            else{
+                for(let i in props.hoverMask){
+                    let node = nodes[Number(i)];
+                    if(props.hoverMask[i] == 1){
+                        node.color = 'red';
+                    }
+                    else{
+                        node.color = node.options.color;
+                    }
+                }
+            }
+        }
+        catch(err){
+            // console.log(err)
+        }
+    },[props.hoverMask]);
     
     useEffect(() => {
         if(props.barHover){
@@ -339,8 +373,8 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
         const stringifiedModel = JSON.stringify(currentModel);
         // console.log(stringifiedModel);
+
         // const modelInput = { model: stringifiedModel, name }
-        
     }
 
     const handleDownload = () => {
@@ -359,9 +393,9 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 className={className}
             />)}
             renderLoader={() => <Loader isActive={state.isLoading} size="tiny" label="Analyzing" />}
-            addPreset={addPreset}
-            onDownload={handleDownload}
-            onClickFaq={() => console.log("history")}
+            // addPreset={addPreset}
+            // onDownload={handleDownload}
+            // onClickFaq={() => console.log("history")}
         />
     </Container>
 }

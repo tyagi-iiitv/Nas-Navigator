@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
+import {DiagramApplication} from './utils/playground'
 
 const equals = (a,b) => 
     a.length === b.length &&

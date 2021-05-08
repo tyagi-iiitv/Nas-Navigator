@@ -28,7 +28,6 @@ export default class App extends Component {
     }
 
     callbackFromChild(dataFromChild){
-        console.log(dataFromChild);
         this.setState({dataRec: false});
         this.setState(dataFromChild, ()=> this.setState({dataRec: true}))
     }
@@ -72,6 +71,7 @@ export default class App extends Component {
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
                     <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
                 </div>
+
             </div>
         )
     }

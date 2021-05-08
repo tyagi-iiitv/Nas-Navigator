@@ -72,6 +72,7 @@ export default class BlockInfo extends React.Component {
                   plot_bgcolor: "transparent",
                   title: "Block Information",
                 }}
+
         useResizeHandler={true}
         style={{height: '100%'}}
       />
