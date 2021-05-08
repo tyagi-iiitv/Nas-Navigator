@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/paper_sub
 # testing
 /coverage
 
