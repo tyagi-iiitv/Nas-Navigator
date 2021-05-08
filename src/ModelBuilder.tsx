@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from "react";
 import { Container } from "semantic-ui-react";
 import { CanvasWidget } from "@projectstorm/react-canvas-core";
@@ -74,6 +75,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         node: undefined,
         id: undefined
     });
+    const [nodeIds, setNodeIds] = useState(false);
     const prevSelectedNode = usePrevious(selectedNode);
     useEffect(() => {
         try {
@@ -87,6 +89,13 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
         }
     }, [state.error]);
     useEffect(() => {
+        // console.log(nodeIds.length)
+        if(nodeIds && nodeIds.length != 0){
+            props.callbackFromChild({nodeIds: nodeIds})
+        }
+    }, [nodeIds]);
+    useEffect(() => {
+        // console.log(props.onCanvas);
         if (prevSelectedNode) {
             const {node, id} = prevSelectedNode;
             if (id) {
@@ -98,10 +107,14 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                         newArgs[item.name] = item.value;
                     }
                 });
+                diagNode.setSelected(false);
                 diagNode.setArgs(newArgs);
                 forceRender();
             }
         }
+        if(props.onCanvas)
+            props.callbackFromChild({selectedNode: selectedNode.id})
+        
     }, [selectedNode.id]);
 
     useEffect(() => {
@@ -134,6 +147,28 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             // console.log(err)
         }
     },[props.hoverMask]);
+    
+    useEffect(() => {
+        if(props.barHover){
+            // console.log(selectedNode)
+            let node = diagramApp.getActiveDiagram().getNode(props.barHover);
+            node.setSelected(true);      
+        }      
+    }, [props.barHover]);
+
+    useEffect(() => {
+        if(props.hoverMask){
+            let nodes = diagramApp.getActiveDiagram().getNodes();
+            for(let i=0;i<props.hoverMask.length;i++){
+                nodes[i].setSelected(false);
+                if(props.hoverMask[i] === '1')
+                    nodes[i].setSelected(true);
+            }
+        }
+    }, [props.hoverMask]);
+    // useEffect(() => {
+    //     props.callbackFromChild({nodeIds: state.nodeIds})
+    // }, [state.nodeIds]);
     
     // useEffect(() => {
     //     const nodes = (diagramApp.getActiveDiagram().getNodes() as unknown as NodeModel[]);
@@ -181,6 +216,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
      */
     
     const selectionChangeListener = (arg: any) => {
+        // console.log(arg)
         if (arg.function === "selectionChanged") {
             if (!arg.isSelected) {
                 setSelectedNode({ node: undefined, id: undefined });
@@ -285,6 +321,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
          */
         const nodes: any = [];
         const links: any = [];
+        const nodeIds = [];
         let presetToCurrentId: any = {};
 
         Object.keys(data.layers[1].models).forEach(nodeId => {
@@ -299,7 +336,6 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
 
         nodes.forEach((nodePreset: any) => {
             const { name, args, options, x, y, id } = nodePreset;
-            
             const node = new NodeModel({ name, 
                 args: options.args, 
                 color: options.color,
@@ -307,6 +343,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             });
             node.setPosition(x, y);
             node.setSelected(true);
+            nodeIds.push(node.options.id);
             diagramApp.getDiagramEngine().getModel().addNode(node);
             attachListenerToNode(node, selectionChangeListener);
             presetToCurrentId[id] = node;
@@ -327,25 +364,16 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
                 diagramApp.getDiagramEngine().getModel().addAll(link);
             }
         })
+        setNodeIds(nodeIds);
         forceRender();
         return;
     }
     
     const addPreset = () => {
-        try{
-            const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
-            const stringifiedModel = JSON.stringify(currentModel);
-            // console.log(stringifiedModel);
-            const node = diagramApp.getDiagramEngine().getModel().getNodes()[0];
-            diagramApp.getDiagramEngine().getModel().removeNode(node);
-            node.color = 'red';
-            diagramApp.getDiagramEngine().getModel().addNode(node);
-            forceRender();
-            
-        }
-        catch(err){
-            
-        }
+        const currentModel = diagramApp.getDiagramEngine().getModel().serialize();
+        const stringifiedModel = JSON.stringify(currentModel);
+        // console.log(stringifiedModel);
+
         // const modelInput = { model: stringifiedModel, name }
     }
 
@@ -362,7 +390,7 @@ const ModelBuilder: React.FC<IModelBuilderComponentProps> = (props) => {
             handleAddPresetModel={addPresetModel}
             renderCanvasWidget={(className?: string) => (<CanvasWidget 
                 engine={diagramApp.getDiagramEngine()} 
-                className={className} 
+                className={className}
             />)}
             renderLoader={() => <Loader isActive={state.isLoading} size="tiny" label="Analyzing" />}
             // addPreset={addPreset}

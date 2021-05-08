@@ -6,8 +6,10 @@ import state from './state';
 import ModelBuilder from './ModelBuilder';
 import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
-import {Container, Grid} from 'semantic-ui-react';   
-import { blockFrequency } from './embeddings';
+import styles from './App.module.scss';
+import PlotEx from './AccuracyChart';
+// import { blockFrequency } from './embeddings';
+// import {Container, Grid} from 'semantic-ui-react';   
 
 
 export default class App extends Component {
@@ -15,6 +17,14 @@ export default class App extends Component {
         super(props);
         this.state = state;
         this.callbackFromChild = this.callbackFromChild.bind(this);
+        this.changeOnCanvas = this.changeOnCanvas.bind(this);
+    }
+
+    changeOnCanvas(enter){
+        if(enter && !this.state.onCanvas)
+            this.setState({onCanvas: true, barHover: null, hoverMask: null});
+        else if(!enter && this.state.onCanvas)
+            this.setState({onCanvas: false});
     }
 
     callbackFromChild(dataFromChild){
@@ -23,14 +33,15 @@ export default class App extends Component {
     }
 
     render(){
-        if (!this.state.dataRec){
-            return(
-                <div>
-                </div>
-            )
-        }
+        // if (this.state.onCanvas){
+        //     return(
+        //         <div>
+        //         </div>
+        //     )
+        // }
+        // console.log(this.state.nodeIds)
         return(
-            <div>
+            <div className={styles.body}>
                 <Navbar bg='dark' variant='dark'>
                     <Navbar.Brand style={{fontSize: 25, padding: '5 0'}}>One-Shot Search</Navbar.Brand>
                     <Nav className="mr-auto">
@@ -46,20 +57,21 @@ export default class App extends Component {
                     </Nav>
                     <Nav>
                         <menu.TrainModel/>
-                        <menu.StartSearch selected={this.state.selected.trainModel} callbackFromChild={this.callbackFromChild}/>
+                        <menu.StartTrain selected={this.state.trainModel} callbackFromChild={this.callbackFromChild}/>
                         <menu.SearchModel/>
-                        <menu.StartSearch selected={this.state.selected.search} callbackFromChild={this.callbackFromChild}/>
+                        <menu.StartSearch selected={this.state.search} callbackFromChild={this.callbackFromChild}/>
                     </Nav>
                 </Navbar>
-                <Grid>
-                    <Grid.Row>
-                        <ModelBuilder hoverMask={this.state.hoverMask} barHover={this.state.barHover} callbackFromChild={this.callbackFromChild}/>    
-                        <Grid.Row width={10} style={{height: '30vh'}}>
-                            <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={blockFrequency} callbackFromChild={this.callbackFromChild}/>
-                            <SearchSpace emb={this.state.embed} callbackFromChild={this.callbackFromChild}/>
-                        </Grid.Row>
-                    </Grid.Row>
-                </Grid>
+                <div className={styles.canvas} onMouseEnter={()=> this.changeOnCanvas(true)}
+                onMouseLeave={()=> this.changeOnCanvas(false)}>
+                    <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover} onCanvas={this.state.onCanvas} hoverMask={this.state.hoverMask}/>
+                </div>
+                <div className={styles.charts}>
+                    <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
+                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
+                    <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
+                </div>
+
             </div>
         )
     }

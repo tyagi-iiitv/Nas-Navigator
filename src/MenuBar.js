@@ -167,7 +167,26 @@ export class StartSearch extends Component {
                 onToggle={(value) => {
                     this.setState({
                     value: !value,
-                    })
+                    }, ()=> this.props.callbackFromChild({search: this.state.value}))
+                }} />
+        )
+    }
+}
+
+export class StartTrain extends Component {
+    constructor(props){
+        super(props);
+        this.state = {value: this.props.selected};
+    }
+
+    render(){
+        return(
+            <ToggleButton 
+                value={ this.state.value || false }
+                onToggle={(value) => {
+                    this.setState({
+                    value: !value,
+                    }, ()=> this.props.callbackFromChild({trainModel: this.state.value}))
                 }} />
         )
     }
@@ -193,6 +212,16 @@ export class GetSearchSpace extends Component {
 }
 
 export class TrainModel extends Component {
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        console.log(event)
+    }
+
     render(){
         const upload_button = (
             <Nav.Link style={{paddingLeft: 15, outline: 'none'}} >Train Model</Nav.Link>
