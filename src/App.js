@@ -8,6 +8,8 @@ import SearchSpace from './SearchSpace';
 import BlockInfo from './BlockInfo';
 import styles from './App.module.scss';
 import PlotEx from './AccuracyChart';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import ProgressBar from './ProgressBar';
 // import { blockFrequency } from './embeddings';
 // import {Container, Grid} from 'semantic-ui-react';   
 
@@ -71,6 +73,7 @@ export default class App extends Component {
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
                     <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
+                    <ProgressBar/>
                 </div>
             </div>
         )
