@@ -73,7 +73,7 @@ export default class App extends Component {
                     <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} />
                     <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
                     <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
-                    <ProgressBar/>
+                    <ProgressBar search={this.state.search}/>
                 </div>
             </div>
         )
