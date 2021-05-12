@@ -10,6 +10,7 @@ export default class SearchSpace extends Component {
     constructor(props){
         super(props);
         this.state = {emb: [], data: [], updated: false};
+        this.colorMap = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628'];
         this.generateData = this.generateData.bind(this);
     }
 
@@ -29,7 +30,7 @@ export default class SearchSpace extends Component {
                 x: data[i][0],
                 y: data[i][1],
                 mask: Math.floor(Math.random()*Math.pow(2,numNodes-1)).toString(2).padStart(numNodes,0),
-                cluster: res.idxs[i],
+                color: this.colorMap[res.idxs[i]],
             }
             emb[i] = curDict;
         }
@@ -63,7 +64,8 @@ export default class SearchSpace extends Component {
                         type: 'scatter',
                         mode: 'markers',
                         // text: this.state.emb.map(({mask}) => mask),
-                        marker: {color: '#F08080', size: 10},
+                        marker: {color: this.state.emb.map(({color}) => color), size: 10}
+                        // marker: {color: '#F08080', size: 10},
                     },
                 ]}
                 onHover = {(e)=>{
@@ -71,27 +73,27 @@ export default class SearchSpace extends Component {
                     // generate random number b/w 1 and max int -> that is the mask
                     this.props.callbackFromChild({hoverMask: this.state.emb[e.points[0].pointNumber].mask})
                 }}
-                onRelayout={(e) => {
-                    //To select points from the scatterplot which are then highlighted on the parallel coordinate plot
-                    if (!e["xaxis.autorange"]){
-                        let ymin = e["yaxis.range[0]"];
-                        let ymax = e["yaxis.range[1]"];
-                        let xmin = e["xaxis.range[0]"];
-                        let xmax = e["xaxis.range[1]"];
-                        //Filtering the points to retrieve the selected points
-                        let filteredArr = [];
-                        for(let i=0;i<this.state.data.length;i++){
-                            // console.log(this.state.embedArr[i].x)
-                            if((this.state.data[i][0] > xmin) && (this.state.data[i][0] < xmax) && (this.state.data[i][1] > ymin) && (this.state.data[i][1] < ymax)){
-                                filteredArr.push(this.state.emb[i]);
-                            }
-                        }
-                        console.log(filteredArr)
-                        //Changes state of app.js by sending selected points
-                        // this.props.callbackFromParent({'scatter_points': filteredArr, 'para_points': filteredArr});
+                // onRelayout={(e) => {
+                //     //To select points from the scatterplot which are then highlighted on the parallel coordinate plot
+                //     if (!e["xaxis.autorange"]){
+                //         let ymin = e["yaxis.range[0]"];
+                //         let ymax = e["yaxis.range[1]"];
+                //         let xmin = e["xaxis.range[0]"];
+                //         let xmax = e["xaxis.range[1]"];
+                //         //Filtering the points to retrieve the selected points
+                //         let filteredArr = [];
+                //         for(let i=0;i<this.state.data.length;i++){
+                //             // console.log(this.state.embedArr[i].x)
+                //             if((this.state.data[i][0] > xmin) && (this.state.data[i][0] < xmax) && (this.state.data[i][1] > ymin) && (this.state.data[i][1] < ymax)){
+                //                 filteredArr.push(this.state.emb[i]);
+                //             }
+                //         }
+                //         console.log(filteredArr)
+                //         //Changes state of app.js by sending selected points
+                //         // this.props.callbackFromParent({'scatter_points': filteredArr, 'para_points': filteredArr});
 
-                    }
-                }}
+                //     }
+                // }}
 
                 layout={ {  
                             uirevision: false, 
