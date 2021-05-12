@@ -39,6 +39,7 @@
     "react-toggle-button": "^2.2.0",
     "resize-observer-polyfill": "^1.5.1",
     "semantic-ui-react": "^0.88.2",
+    "skmeans": "^0.11.3",
     "styled-components": "^5.2.1",
     "toposort": "^2.0.2",
     "typescript": "~3.8.0",
