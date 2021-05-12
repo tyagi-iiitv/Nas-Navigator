@@ -28,7 +28,7 @@ export default class ProgressBar extends Component {
         if(this.props.search){
             const progress = this.state.progress + 10;
             if(progress >= 100){
-                this.setState({iteration: this.state.iteration+1, progress: 0})
+                this.setState({iteration: this.state.iteration+1, progress: 0}, ()=> this.props.callbackFromChild({iteration: this.state.iteration}))
             }
             else{
                 this.setState({progress: progress});

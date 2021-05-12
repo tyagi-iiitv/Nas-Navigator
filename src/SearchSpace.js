@@ -10,8 +10,10 @@ export default class SearchSpace extends Component {
     constructor(props){
         super(props);
         this.state = {emb: [], data: [], updated: false};
-        this.colorMap = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628'];
+        this.colorMap = ['#ffffcc','#c7e9b4','#7fcdbb','#41b6c4','#2c7fb8','#253494'];
         this.generateData = this.generateData.bind(this);
+        this.randomFactor = 0.7;
+        this.baseColor = '';
     }
 
     generateData(nodeIds){
@@ -26,11 +28,15 @@ export default class SearchSpace extends Component {
         }
         let res = skmeans(data, 6, null, 10);
         for(let i=0;i<numPoints;i++){
+            let colorId = Math.floor(Math.random()*this.colorMap.length);
+            if(Math.random < this.randomFactor){
+                colorId = res.idxs[i];
+            }
             let curDict = {
                 x: data[i][0],
                 y: data[i][1],
                 mask: Math.floor(Math.random()*Math.pow(2,numNodes-1)).toString(2).padStart(numNodes,0),
-                color: this.colorMap[res.idxs[i]],
+                color: this.colorMap[colorId],
             }
             emb[i] = curDict;
         }
