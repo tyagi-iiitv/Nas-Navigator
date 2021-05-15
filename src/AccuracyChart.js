@@ -19,7 +19,8 @@ export default class PlotEx extends React.Component {
         datarevision: 0,
         plot_bgcolor: 'transparent', 
         paper_bgcolor: 'transparent',
-        title: 'Loss Chart'
+        title: 'Loss Chart',
+        autosize: true,
       },
       revision: 0,
       loss: this.props.loss,
@@ -75,6 +76,8 @@ export default class PlotEx extends React.Component {
           this.state.line2,
         ]}
         layout={this.state.layout}
+        useResizeHandler={true}
+        style={{width: '100%', height: '100%'}}
         revision={this.state.revision}
         graphDiv="graph"
       />

@@ -107,8 +107,13 @@ export default class SearchSpace extends Component {
                             yaxis: {autorange: true}, 
                             paper_bgcolor: "transparent",
                             plot_bgcolor: "transparent",
-                            title: "Search Space"
+                            title: "Search Space",
+                            autosize: true,
                         }}
+                
+                useResizeHandler={true}
+
+                style={{width: '100%', height: '100%'}}
                     /> 
             </div>
 

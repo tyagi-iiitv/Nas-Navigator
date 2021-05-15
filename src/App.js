@@ -70,9 +70,15 @@ export default class App extends Component {
                     <ModelBuilder callbackFromChild={this.callbackFromChild} barHover={this.state.barHover} onCanvas={this.state.onCanvas} hoverMask={this.state.hoverMask}/>
                 </div>
                 <div className={styles.charts}>
-                    <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} iteration={this.state.iteration}/>
-                    <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
-                    <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
+                    <div className={styles.searchSpace}>
+                        <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} iteration={this.state.iteration}/>
+                    </div>
+                    <div className={styles.blockInfo}>
+                        <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
+                    </div>
+                    <div className={styles.lossChart}>
+                        <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>
+                    </div>
                     <ProgressBar search={this.state.search} callbackFromChild={this.callbackFromChild}/>
                 </div>
             </div>
