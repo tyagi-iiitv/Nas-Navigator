@@ -10,8 +10,9 @@ export default class ProgressBar extends Component {
             iteration: 1,
             progress: 0,
             on: this.props.search,
-            interval: null
+            interval: null,
         }
+        this.timeDiff = 100;
     }
 
     componentDidUpdate(prevProps){
@@ -20,7 +21,7 @@ export default class ProgressBar extends Component {
             clearInterval(this.state.interval);
         }
         if(this.props.search && prevProps.search !== this.props.search){
-            this.setState({interval: setInterval(this.increaseGraphic, 1000)})
+            this.setState({interval: setInterval(this.increaseGraphic, this.timeDiff)})
         }
     }
 

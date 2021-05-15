@@ -12,13 +12,17 @@ export default class SearchSpace extends Component {
         this.state = {emb: [], data: [], updated: false};
         this.colorMap = ['#ffffcc','#c7e9b4','#7fcdbb','#41b6c4','#2c7fb8','#253494'];
         this.generateData = this.generateData.bind(this);
-        this.randomFactor = 0.7;
-        this.baseColor = '';
+        this.addColors = this.addColors.bind(this);
+        this.randomFactor = 0.6;
+        this.baseColor = '#F08080';
+        this.addPerIteration = 10;
+        this.numPoints = 200;
+        this.pointIds = [...Array(this.numPoints).keys()].sort(() => Math.random() - Math.random())
     }
 
     generateData(nodeIds){
         let numNodes = nodeIds.length;
-        let numPoints = 200;
+        let numPoints = this.numPoints;
         let emb = new Array(numPoints);
         let data = new Array(numPoints);
         for(let i=0;i<numPoints;i++){
@@ -29,7 +33,7 @@ export default class SearchSpace extends Component {
         let res = skmeans(data, 6, null, 10);
         for(let i=0;i<numPoints;i++){
             let colorId = Math.floor(Math.random()*this.colorMap.length);
-            if(Math.random < this.randomFactor){
+            if(Math.random() < this.randomFactor){
                 colorId = res.idxs[i];
             }
             let curDict = {
@@ -37,13 +41,30 @@ export default class SearchSpace extends Component {
                 y: data[i][1],
                 mask: Math.floor(Math.random()*Math.pow(2,numNodes-1)).toString(2).padStart(numNodes,0),
                 color: this.colorMap[colorId],
+                displayColor: this.baseColor,
             }
             emb[i] = curDict;
         }
         this.setState({emb: emb, data: data}, ()=> console.log(this.state.emb));
     }
 
+    addColors(){
+        console.log("Adding colors")
+        let curEmb = this.state.emb;
+        for(let i=0;i<this.addPerIteration;i++){
+            let colorId = this.pointIds[(this.props.iteration-1)*this.addPerIteration + i];
+            console.log(colorId, curEmb)
+            curEmb[colorId].displayColor = curEmb[colorId].color;
+        }
+        this.setState({emb: curEmb}, ()=> console.log(this.state.emb));
+        
+    }
+
     shouldComponentUpdate(prevProps, nextState){
+        if(prevProps.iteration && this.props.iteration && prevProps.iteration !== this.props.iteration){
+            console.log("iteration changed");
+            return true;
+        }
         if(this.state.updated){
             console.log("false");
             return false;
@@ -53,6 +74,9 @@ export default class SearchSpace extends Component {
     }
 
     componentDidUpdate(prevProps){
+        if(prevProps.iteration && this.props.iteration && prevProps.iteration !== this.props.iteration){
+            this.addColors();
+        }
         if(prevProps.nodes && this.props.nodes && !equals(prevProps.nodes, this.props.nodes)){
             this.generateData(this.props.nodes);
             this.setState({updated: true});
@@ -70,7 +94,7 @@ export default class SearchSpace extends Component {
                         type: 'scatter',
                         mode: 'markers',
                         // text: this.state.emb.map(({mask}) => mask),
-                        marker: {color: this.state.emb.map(({color}) => color), size: 10}
+                        marker: {color: this.state.emb.map(({displayColor}) => displayColor), size: 10}
                         // marker: {color: '#F08080', size: 10},
                     },
                 ]}
