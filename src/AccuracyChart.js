@@ -8,7 +8,7 @@ export default class PlotEx extends React.Component {
       line1: {
         x: [0],
         y: [this.props.loss[0]], 
-        name: 'Loss'
+        name: 'Training Loss'
       },
       line2: {
         x: [0],
@@ -21,8 +21,8 @@ export default class PlotEx extends React.Component {
         paper_bgcolor: 'transparent',
         title: {text: 'Loss Chart', font:{color: '#fff'}},
         autosize: true,
-        xaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff'},
-        yaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff'},
+        xaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff', title: '# Epoch'},
+        yaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff', title: 'Loss value'},
         legend: {x: 1, xanchor: 'right', y: 1},
       },
       revision: 0,
