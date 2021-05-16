@@ -9,7 +9,9 @@
     max-width: 13rem;
 
     &--selected {
-        border: 5px solid rgb(255, 196, 0);
+        // border: 5px solid rgb(255, 196, 0);
+        border: 5px solid #d73027;
+        // border: 5px solid #41b6c4;
         border-radius: 10px;
     }
 

@@ -87,8 +87,8 @@ export default class BlockInfo extends React.Component {
         // }
         layout={{
                   uirevision: false, 
-                  xaxis:{autorange: true, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff'}, 
-                  yaxis: {autorange: true, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff'}, 
+                  xaxis:{autorange: false, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff', title: 'Fitness Score', range:[0,1]}, 
+                  yaxis: {autorange: true, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff', title: 'Frequency'}, 
                   paper_bgcolor: "transparent",
                   plot_bgcolor: "transparent",
                   title: {text: "Block Information", font:{color: '#fff'}},
