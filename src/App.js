@@ -74,7 +74,7 @@ export default class App extends Component {
                         <SearchSpace nodes={this.state.nodeIds} callbackFromChild={this.callbackFromChild} iteration={this.state.iteration}/>
                     </div>
                     <div className={styles.blockInfo}>
-                        <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode}/>
+                        <BlockInfo fitnessScores={this.state.fitnessScores} initialFitness={this.state.initialFitness} blockFrequency={this.state.blockFrequency} callbackFromChild={this.callbackFromChild} nodeIds={this.state.nodeIds} selectedNode={this.state.selectedNode} iteration={this.state.iteration}/>
                     </div>
                     <div className={styles.lossChart}>
                         <PlotEx trainModel={this.state.trainModel} loss={this.state.loss} valLoss={this.state.valLoss}/>

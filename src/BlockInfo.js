@@ -12,13 +12,16 @@ export default class BlockInfo extends React.Component {
     super(props);
     this.state = {emb: [], selectedNode: []}
     this.generateData = this.generateData.bind(this);
+    this.updateData = this.updateData.bind(this);
+    this.updatePerIteration = 10;
+    this.changeFactor = 0.05;
   }
 
   generateData(nodeIds){
     let emb = new Array(nodeIds.length);
     for(let i=0;i<nodeIds.length;i++){
       let curDict = {
-        x: Math.random(),
+        x: 0.5,
         y: Math.floor(Math.random() * (170-130) + 130),
         id: nodeIds[i]
       }
@@ -27,7 +30,24 @@ export default class BlockInfo extends React.Component {
     this.setState({emb: emb})
   }
 
+  updateData(){
+    let curEmb = this.state.emb;
+    let curIds = [...Array(this.state.emb.length).keys()].sort(()=>Math.random()-Math.random());
+    for(let i=0;i<this.updatePerIteration;i++){
+      if(Math.random() < curEmb[curIds[i]].x){
+        curEmb[curIds[i]].x = Math.min(curEmb[curIds[i]].x + this.changeFactor, 1);
+      }
+      else{
+        curEmb[curIds[i]].x = Math.max(curEmb[curIds[i]].x - this.changeFactor, 0);
+      }
+    }
+    this.setState({emb: curEmb});
+  }
+
   componentDidUpdate(prevProps){
+    if(prevProps.iteration && this.props.iteration && prevProps.iteration !== this.props.iteration){
+      this.updateData();
+    }
     if(prevProps && this.props.nodeIds && !equals(prevProps.nodeIds, this.props.nodeIds)){
       this.generateData(this.props.nodeIds);
     }
