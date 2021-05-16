@@ -66,12 +66,14 @@ export default class BlockInfo extends React.Component {
     
         // }
         layout={{
-                  uirevision: false, xaxis:{autorange: true}, 
-                  yaxis: {autorange: true}, 
+                  uirevision: false, 
+                  xaxis:{autorange: true, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff'}, 
+                  yaxis: {autorange: true, showgrid: false, showline: true, zeroline: false, mirror: true, color: '#fff'}, 
                   paper_bgcolor: "transparent",
                   plot_bgcolor: "transparent",
-                  title: "Block Information",
+                  title: {text: "Block Information", font:{color: '#fff'}},
                   autosize: true,
+                  showlegend: false,
                 }}
         useResizeHandler={true}
         style={{width: '100%', height: '100%'}}

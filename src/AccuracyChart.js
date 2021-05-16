@@ -19,8 +19,11 @@ export default class PlotEx extends React.Component {
         datarevision: 0,
         plot_bgcolor: 'transparent', 
         paper_bgcolor: 'transparent',
-        title: 'Loss Chart',
+        title: {text: 'Loss Chart', font:{color: '#fff'}},
         autosize: true,
+        xaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff'},
+        yaxis:{showgrid: false, showline: true, showticklabels: true, zeroline: false, mirror: true, color: '#fff'},
+        legend: {x: 1, xanchor: 'right', y: 1},
       },
       revision: 0,
       loss: this.props.loss,
@@ -53,13 +56,13 @@ export default class PlotEx extends React.Component {
       const { line1, line2, layout } = this.state;
       line1.x.push(this.state.revision+1);
       line1.y.push(this.state.loss[this.state.revision+1]);
-      if (line1.x.length >= 10) {
+      if (line1.x.length >= 20) {
         line1.x.shift();
         line1.y.shift();
       } 
       line2.x.push(this.state.revision+1);
       line2.y.push(this.state.valLoss[this.state.revision+1]);
-      if (line2.x.length >= 10) {
+      if (line2.x.length >= 20) {
         line2.x.shift();
         line2.y.shift();
       }

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
 const skmeans = require('skmeans');
 
+
+
 const equals = (a,b) => 
     a.length === b.length &&
     a.every((v,i) => v === b[i]);
@@ -17,7 +19,7 @@ export default class SearchSpace extends Component {
         this.baseColor = '#F08080';
         this.addPerIteration = 10;
         this.numPoints = 200;
-        this.pointIds = [...Array(this.numPoints).keys()].sort(() => Math.random() - Math.random())
+        this.pointIds = [...Array(this.numPoints).keys()].sort(() => Math.random() - Math.random());
     }
 
     generateData(nodeIds){
@@ -127,11 +129,11 @@ export default class SearchSpace extends Component {
 
                 layout={ {  
                             uirevision: false, 
-                            xaxis:{autorange: true}, 
-                            yaxis: {autorange: true}, 
+                            xaxis:{autorange: true, showgrid: false, showline: true, showticklabels: false, zeroline: false, mirror: true, color: '#fff'}, 
+                            yaxis: {autorange: true, showgrid: false, showlegend: false, showline: true, zeroline: false, showticklabels: false, mirror: true, color: '#fff'}, 
                             paper_bgcolor: "transparent",
                             plot_bgcolor: "transparent",
-                            title: "Search Space",
+                            title: {text: "Search Space", font: {color: '#fff'}},
                             autosize: true,
                         }}
                 
